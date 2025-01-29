@@ -1,4 +1,4 @@
-# 17. Print CSV
+# 18. Print json
 import os
 
 import typer
