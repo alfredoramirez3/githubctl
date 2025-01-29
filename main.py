@@ -1,9 +1,9 @@
-# 12. Load environment with python-dotenv
+# 16. Option with Choice
 import os
+from enum import Enum
 import typer
-from rich import print as rprint
+from rich import print
 from dotenv import load_dotenv
-# import wat
 from github import get_all_user_repositories
 
 if os.path.isfile(".env"):
@@ -14,16 +14,18 @@ app = typer.Typer()
 repo_app = typer.Typer()
 app.add_typer(repo_app, name="repo")
 
+class OutputOption(str, Enum):
+    json = 'json'
+    csv = 'csv'
+    table = 'table'
 
 @repo_app.command(name="list", help="list user repository")
-def list_repos(user: str = typer.Option(..., "--user", "-u", help="github user name")):
-    repos = get_all_user_repositories(username=user)
-    
-    rprint(repos)
-    rprint(f'num public repos: {len(repos)}')
-    # rprint(f'repos type: {type(repos)}, repos element type: {type(repos[0])}')
-    # wout = wat.short / ['repos']
-    # rprint(wout)
+def list_repos(user: str = typer.Option(..., "--user", "-u", help="github user name"),
+               output: OutputOption = typer.Option(OutputOption.json, "--output", "-o", help="output format"),):
+    # repos = get_all_user_repositories(username=user)
+    # print(repos)
+    # print(f'num public repos: {len(repos)}')
+    print(user, output)
 
 
 if __name__ == "__main__":
