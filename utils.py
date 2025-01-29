@@ -34,10 +34,21 @@ def print_beauty(list_of_dict: List[dict], output: OutputOption):
         console.print(table)
         
         
-def sort_by_key(list_of_dict, key, reverse=False):
-    if reverse:
-        expr = f"sort_by(@, &{key}).reverse(@)"
-    else:
-        expr = f"sort_by(@, &{key})"
+def sort_by_key(list_of_dict, key_list, reverse=False):
+    # key_list = ['stars', 'forks']
+    key_list.reverse()
+    # key_list = ['forks', 'stars']
     
+    expr = ''
+    for key in key_list:
+        if not expr:
+            expr = f"sort_by(@, &{key})"
+        else:
+            expr = f"sort_by({expr}, &{key})"
+            
+            
+    if reverse:
+        expr = f"{expr}.reverse(@)"
+
+    print(expr)
     return jmespath.search(expr, list_of_dict)

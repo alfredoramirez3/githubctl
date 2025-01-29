@@ -1,4 +1,4 @@
-# 27. Add --sort_by Option
+# 28. Sort by Multiple Keys
 import os
 
 import typer
@@ -34,10 +34,10 @@ def list_repos(user: str = typer.Option(..., "--user", "-u", help="github user n
     if sort_by:
         if sort_by.startswith('~'):
             reverse = True
-            sort_by = sort_by[1:]
+            sort_by = sort_by[1:].split(",")
         else:
             reverse = False
-        repos = sort_by_key(list_of_dict=repos, key=sort_by, reverse=reverse)
+        repos = sort_by_key(list_of_dict=repos, key_list=sort_by, reverse=reverse)
     print_beauty(repos, output=output)
 
 
