@@ -1,4 +1,4 @@
-# 22. New Feature Request: Filtering
+# 26. Sorting with JMESPATH
 import os
 
 import typer
