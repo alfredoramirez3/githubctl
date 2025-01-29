@@ -1,4 +1,4 @@
-# 19. Print table
+# 21. Add table index
 import os
 
 import typer
