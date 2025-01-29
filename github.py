@@ -1,4 +1,4 @@
-# 11. Initial Typer App with a few minor changes to make code work without using os.environ...
+# 12. Load environment with python-dotenv
 
 import os
 import requests
