@@ -1,4 +1,4 @@
-# 18. Print json
+# 19. Print table
 import os
 
 import typer
