@@ -1,5 +1,3 @@
-# 12. Load environment with python-dotenv
-
 import os
 import requests
 
@@ -7,11 +5,11 @@ import requests
 def get_all_user_repositories(username):
     base_url = f"https://api.github.com/users/{username}/repos"
     repos = []
-    # if os.environ.get("GITHUB_TOKEN"):
-    #     headers = {"Authorization": f"Bearer {os.environ.get('GITHUB_TOKEN')}"}
-    # else:
-    #     headers = None
-    headers = {'Authorization': '.....'}
+    if os.environ.get("GITHUB_TOKEN"):
+        headers = {"Authorization": f"Bearer {os.environ.get('GITHUB_TOKEN')}"}
+    else:
+        headers = None
+    # headers = {'Authorization': '.....'}
     
     try:
         page = 1
