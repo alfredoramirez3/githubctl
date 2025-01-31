@@ -1,7 +1,7 @@
 import os
-import typer
-from dotenv import load_dotenv
 
+from dotenv import load_dotenv
+import typer
 
 from githubctl.cli.repo import repo_app
 

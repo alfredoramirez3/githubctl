@@ -1,9 +1,8 @@
-import typer
 import jmespath
+import typer
 
-
-from githubctl.options import OutputOption
 from githubctl.github import get_all_user_repositories
+from githubctl.options import OutputOption
 from githubctl.utils import print_beauty, sort_by_key
 
 
@@ -16,8 +15,8 @@ def list_repos(user: str = typer.Option(..., "--user", "-u", help="github user n
                query: str = typer.Option(None, "--query", "-q", help="query with jmespath"),
                sort_by: str = typer.Option(None, "--sort_by", "-s", help="sort by key"),):
     repos = get_all_user_repositories(username=user)
-    # print(repos)
-    # print(f'num public repos: {len(repos)}')
+    # print(repos) # debug code
+    # print(f'num public repos: {len(repos)}') # debug code
     if query:
         repos = jmespath.search(query, repos)
     if sort_by:

@@ -1,11 +1,12 @@
 import csv
 import json
-import jmespath
 import sys
-from typing import List
+
+import jmespath
 from rich import print_json
 from rich.console import Console
 from rich.table import Table
+from typing import List
 
 
 from githubctl.options import OutputOption
