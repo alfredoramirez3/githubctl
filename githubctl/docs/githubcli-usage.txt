@@ -1,0 +1,44 @@
+githubctl (command structure)
+repo  (command)
+  --help (option)
+  list (subcommand)
+    Options
+      --help                               Show this message and exit.
+      --user     -u      TEXT              github user name [default: None] [required]
+      --output   -o      [json|csv|table]  output format [default: table]
+      --query    -q      TEXT              query with jmespath [default: None]
+      --sort_by  -s      TEXT              sort by key [default: None]
+
+Examples:
+--help
+uv run main.py --help
+uv run main.py repo --help
+uv run main.py repo list --help
+
+--output
+uv run main.py repo list --user=haoel # --output defaults to table
+uv run main.py repo list --user=haoel --output=json
+uv run main.py repo list --user=haoel --output=csv
+uv run main.py repo list --user=haoel --output=table
+ 
+--query (filter based on jmespath query language); https://jmespath.org/
+uv run main.py repo list --user=haoel --query="[?language=='Go']"
+uv run main.py repo list --user=haoel --query="[?language=='Go' && description!=None]"
+uv run main.py repo list --user=haoel --query="[?language=='Go' && contains(description, 'Go')]"
+uv run main.py repo list --user=haoel --query="[?language=='Go' && description!=None && contains(description, 'Go')]"
+
+--query (sort within query based on jmespath query language); https://jmespath.org/
+uv run main.py repo list --user=haoel --query="sort_by(@,&stars)"
+uv run main.py repo list --user=haoel --query="sort_by(@,&stars).reverse(@)"
+uv run main.py repo list --user=haoel --query="sort_by([?language=='Go'], &stars)"
+uv run main.py repo list --user=haoel --query="sort_by([?language=='Go'], &stars).reverse(@)"
+ 
+# provided as a conveience for user
+--sort_by (sort_by option based on jmespath query language); https://jmespath.org/
+uv run main.py repo list --user=haoel --sort_by="~stars,forks"
+
+--query --sort_by
+uv run main.py repo list --user=haoel --query="[?language=='Go']" --sort_by="stars"
+uv run main.py repo list --user=haoel --query="[?language=='Go']" --sort_by="~stars"
+uv run main.py repo list --user=haoel --query="[?language=='Go']" --sort_by="~stars,forks"
+
